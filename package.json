@@ -1,0 +1,11 @@
+{
+  "name": "fbi_wanted_final",
+  "version": "1.0.0",
+  "description": "a server application for interacting with the FBI wanted list",
+  "main": "server.js",
+  "scripts": {
+    "dev": "npx nodemon server.js"
+  },
+  "author": "Luis Cortez & Jacob Valenzuela",
+  "license": "MIT"
+}

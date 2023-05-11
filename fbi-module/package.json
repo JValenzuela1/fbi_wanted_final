@@ -1,0 +1,14 @@
+{
+  "name": "fbi-module",
+  "version": "1.0.0",
+  "description": "node module for fbi api",
+  "main": "api.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Luis Cortez & Jacob Valenzuela",
+  "license": "ISC",
+  "dependencies": {
+    "superagent": "^8.0.9"
+  }
+}

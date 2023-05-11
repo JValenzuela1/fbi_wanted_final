@@ -2,7 +2,7 @@ const { MongoClient } = require('mongodb');
 const config = require('../config.json');
 
 const mongo = () => {
-    const uri = `mongodb+srv://${config.username}:${config.password}@cluster0.iyuzqre.mongodb.net/${config.db}?retryWrites=true&w=majority`;
+    const uri = `mongodb+srv://${config.username}:${config.password}@cluster0.0joto0c.mongodb.net/${config.db}?retryWrites=true&w=majority`;
     let db = null;
 
     async function connect() {

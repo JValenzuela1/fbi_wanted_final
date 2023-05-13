@@ -45,10 +45,24 @@ const mongo = () => {
         }
     }
 
+    async function update(search, data) {
+        try {
+            const collection = db.collection(config.collection);
+
+            await collection.updateOne(
+                { searchTerm: search },
+                { $set: data }
+            );
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return {
         connect,
         save,
-        find
+        find,
+        update
     };
 };
 

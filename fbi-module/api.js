@@ -6,8 +6,8 @@ const urls = {
 
 const searchLooks = async (params) => {
     try {
-        const res = await superagent.get(urls.looks).query(params);
-        return res.body;
+        const searchResults = await superagent.get(urls.looks).query(params);
+        return searchResults.body;
 
     } catch(error) {
         console.log('Error: ', error['response']);
@@ -16,8 +16,8 @@ const searchLooks = async (params) => {
 
 const searchUID = async (uid) => {
     try{
-        const res = await superagent.get(urls.uid + uid);
-        return res.body;
+        const idResults = await superagent.get(urls.uid + uid);
+        return idResults.body;
         
     } catch(error) {
         console.log('Error: ', error['response']['_body']['reason']);

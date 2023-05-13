@@ -33,20 +33,25 @@ router.get('/', async (req, res) => {
         const results = await FBI.searchLooks(params);
 
         const result = {
-            'searchTerm' : query.hair,
-            'page' : results.page,
+            'searchTerm' : hair,
             results : _fomartResult(results)
         };
 
         res.json(result);
 
         const history = {
-            'searchTerm' : query.hair,
+            'searchTerm' : hair,
             'searchCount' : results.total,
             'lastSearched' : new Date()
         };
 
-        db.save(history);
+        let doc = await db.find(hair);
+        if (doc === null) {
+            db.save(history);
+        }
+        else {
+            db.update(hair, history);
+        }
     } catch (error) {
         res.status(500).json(error.toString());
     } 
@@ -54,7 +59,32 @@ router.get('/', async (req, res) => {
 
 router.get('/:id/details', async (req, res) => {
     try {
-        
+        const { params, query } = req;
+        const { id } = params; 
+        const { hair = '' } = query;
+
+        const result = await FBI.searchUID(id);
+        // add selection
+        const doc = await db.find(hair);
+        if ('selection' in doc) {
+            doc.selection.push(
+                {
+                    'display' : result.title,
+                    'id' : result.uid
+                }
+            );
+        }
+        else {
+            doc.selection = [
+                {
+                    'display' : result.title,
+                    'id' : result.uid
+                }
+            ];
+        }
+        db.update(hair, doc);
+
+        res.json(result);
     } catch (error) {
         res.status(500).json(error.toString());
     } 
